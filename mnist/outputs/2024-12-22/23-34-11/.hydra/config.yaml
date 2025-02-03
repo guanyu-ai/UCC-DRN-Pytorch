@@ -1,0 +1,47 @@
+args:
+  dataset: mnist
+  model_dir: saved_models/
+  model_name: mnist_ucc_drn
+  num_instances: 32
+  ucc_start: 1
+  ucc_end: 4
+  batch_size: 20
+  num_samples_per_class: 5
+  num_workers: 4
+  learning_rate: 0.0001
+  num_bins: 11
+  num_features: 10
+  train_num_steps: 100000
+  val_num_steps: 200
+  save_interval: 1000
+  seed: 22
+model:
+  num_channels: 1
+  input_shape:
+  - 28
+  - 28
+  - 1
+  kde_model:
+    num_bins: 11
+    sigma: 0.1
+  encoder:
+    conv_input_channel: 1
+    conv_output_channel: 16
+    block1_output_channel: 321
+    block1_num_layer: 1
+    block2_output_channel: 64
+    block2_num_layer: 1
+    block3_output_channel: 128
+    block3_num_layer: 1
+    flatten_size: 6272
+    num_features: 10
+  decoder: None
+  drn:
+    num_bins: 11
+    hidden_q: 100
+    num_layers: 3
+    num_nodes: 9
+    output_bins: 4
+  ucc_classifier: None
+  loss:
+    alpha: 1
