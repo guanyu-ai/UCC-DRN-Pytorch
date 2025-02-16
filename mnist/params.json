@@ -15,7 +15,7 @@
   },
   "num_features": {
     "type": "int",
-    "range": [5, 30],
+    "range": [10, 20],
     "aliases": ["args.num_features", "model.encoder.num_features"]
   },
   "hidden_q": {
@@ -25,12 +25,12 @@
   },
   "num_layers": {
     "type": "int",
-    "range": [1, 30],
+    "range": [1, 10],
     "aliases": ["model.drn.num_layers"]
   },
   "num_nodes": {
     "type": "int",
-    "range": [1, 50],
+    "range": [1, 10],
     "aliases": ["model.drn.num_nodes"]
   }
 }

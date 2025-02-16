@@ -18,6 +18,7 @@ from model import UCCDRNModel
 from dataset import MnistDataset
 from omegaconf import DictConfig
 from utils import get_or_create_experiment, parse_experiment_runs_to_optuna_study
+from optimizers import SGLD
 torch.autograd.set_detect_anomaly(True)
 
 
@@ -31,8 +32,8 @@ def set_random_seed(seed):
 
 def init_model_and_optimizer(args, model_cfg, device):
     model = UCCDRNModel(model_cfg).to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
-
+    # optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
+    optimizer = SGLD(model.parameters(), lr=args.learning_rate, add_noise=True)
     return model, optimizer
 
 
@@ -131,7 +132,7 @@ def train(args, model, optimizer, lr_scheduler, train_loader, val_loader, device
     patience = 10
     for batch_samples, batch_labels in tqdm(train_loader):
         batch_samples = batch_samples.to(device)
-        batch_labels = batch_labels.to(torch.float32).to(device)
+        batch_labels = batch_labels.to(device)
         optimizer.zero_grad()
 
         if model.alpha==1:
@@ -242,6 +243,7 @@ def objective(trial:optuna.Trial):
         model, optimizer = init_model_and_optimizer(args, cfg, device)
         lr_scheduler = OneCycleLR(optimizer, max_lr=0.01, steps_per_epoch=10, epochs=int(args.train_num_steps/10))
         train_loader, val_loader = init_dataloader(args)
+        print(cfg)
         best_acc = train(args, model, optimizer, lr_scheduler, train_loader, val_loader, device)
     return best_acc
 
