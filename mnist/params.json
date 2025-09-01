@@ -10,7 +10,7 @@
   },
   "lr": {
     "type": "float",
-    "range": [0.0001, 5.0],
+    "range": [0.0001, 0.1],
     "aliases": ["args.learning_rate"]
   },
   "num_features": {

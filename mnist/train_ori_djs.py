@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 import os
 from tqdm import tqdm
 
-from model import UCCModel
+from model_ori import UCCModel
 from dataset import MnistDataset
 from hydra import initialize, compose
 from utils import get_or_create_experiment
@@ -53,7 +53,7 @@ def init_dataloader(args):
         mode="train",
         num_instances=args.num_instances,
         num_samples_per_class=args.num_samples_per_class,
-        digit_arr=list(range(10)),
+        digit_arr=list(range(args.ucc_end-args.ucc_start+1)),
         ucc_start=args.ucc_start,
         ucc_end=args.ucc_end,
         length=train_dataset_len,
@@ -63,7 +63,7 @@ def init_dataloader(args):
         mode="val",
         num_instances=args.num_instances,
         num_samples_per_class=args.num_samples_per_class,
-        digit_arr=list(range(10)),
+        digit_arr=list(range(args.ucc_end-args.ucc_start+1)),
         ucc_start=args.ucc_start,
         ucc_end=args.ucc_end,
         length=val_dataset_len,
@@ -103,7 +103,7 @@ def init_dataloader(args):
 
 def evaluate(model, val_loader, lr_scheduler, device):
     model.eval()
-    # val_jsd_loss_list = []
+    val_jsd_loss_list = []
     val_ae_loss_list = []
     val_ucc_loss_list = []
     val_acc_list = []
@@ -116,8 +116,8 @@ def evaluate(model, val_loader, lr_scheduler, device):
             ucc_logits, reconstruction = model(
                 batch_samples, return_reconstruction=True)
 
-            # jsd_loss = Ldjs(ucc_logits, batch_labels_one_hot)
-            # val_jsd_loss_list.append(jsd_loss.item())
+            jsd_loss = Ldjs(ucc_logits, batch_labels_one_hot)
+            val_jsd_loss_list.append(jsd_loss.item())
 
             ucc_loss = F.cross_entropy(ucc_logits, batch_labels)
             val_ucc_loss_list.append(ucc_loss.item())
@@ -133,7 +133,7 @@ def evaluate(model, val_loader, lr_scheduler, device):
                 ucc_predicts == batch_labels).item() / len(batch_labels)
             val_acc_list.append(acc)
     return {
-        # "eval_ucc_djs_loss": np.round(np.mean(val_jsd_loss_list), 5),
+        "eval_ucc_djs_loss": np.round(np.mean(val_jsd_loss_list), 5),
         "eval_ae_loss": np.round(np.mean(val_ae_loss_list), 5),
         "eval_ucc_loss": np.round(np.mean(val_ucc_loss_list), 5),
         "eval_ucc_acc": np.round(np.mean(val_acc_list), 5)
@@ -148,13 +148,13 @@ def train(args, model, optimizer, lr_scheduler, train_loader, val_loader, device
     for batch_samples, batch_labels in train_loader:
         batch_samples = batch_samples.to(device)
         batch_labels = batch_labels.to(device)
-        # batch_labels_one_hot = F.one_hot(batch_labels, 4)
+        batch_labels_one_hot = F.one_hot(batch_labels, 4)
         optimizer.zero_grad()
         ucc_logits, reconstruction = model(batch_samples, return_reconstruction=True)
-        # ae_loss = F.mse_loss(batch_samples, reconstruction)
-        # djs_loss = Ldjs(ucc_logits, batch_labels_one_hot)
-        ucc_loss, ae_loss, loss = model.compute_loss(batch_samples, batch_labels, ucc_logits, reconstruction, return_losses=True)
-        # loss = (1-model.alpha)*ae_loss+model.alpha*djs_loss
+        ae_loss = F.mse_loss(batch_samples, reconstruction)
+        djs_loss = Ldjs(ucc_logits, batch_labels_one_hot)
+        # ucc_loss, ae_loss, loss = model.compute_loss(batch_samples, batch_labels, ucc_logits, reconstruction, return_losses=True)
+        loss = (1-model.alpha)*ae_loss+model.alpha*djs_loss
         
         loss.backward()
         optimizer.step()
@@ -188,7 +188,7 @@ def train(args, model, optimizer, lr_scheduler, train_loader, val_loader, device
             eval_acc = eval_metric_dict["eval_ucc_acc"]
             eval_loss = eval_metric_dict["eval_ae_loss"]
             if eval_acc > best_eval_acc or eval_loss <best_eval_loss:
-                if eval_loss<best_eval_loss:
+                if eval_loss <best_eval_loss:
                     best_eval_loss = eval_loss
                     
                 if eval_acc > best_eval_acc:
@@ -213,7 +213,7 @@ def train(args, model, optimizer, lr_scheduler, train_loader, val_loader, device
 
 if __name__ == "__main__":
     mlflow.set_tracking_uri("mlruns")
-    run_name = "ucc-ori"
+    run_name = "ucc-ori-jsd"
     experiment_id = get_or_create_experiment(experiment_name=run_name)
     mlflow.set_experiment(experiment_id=experiment_id)
     cfg_name = "train"
