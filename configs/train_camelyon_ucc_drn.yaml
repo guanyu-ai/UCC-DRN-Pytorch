@@ -1,22 +1,21 @@
 defaults:
   - _self_
-  - model: mnist_ucc_drn.yaml
+  - model: camelyon_ucc_drn.yaml
   # experiment configs allow for version control of specific hyperparameters
   - experiment: null
 args:
-  dataset: mnist
+  dataset: camelyon
   model_dir: saved_models/
-  model_name: mnist_ucc_drn
+  model_name: camelyon_ucc_drn
   num_instances: 32
-  ucc_start: 1
-  ucc_end: 4
-  batch_size: 20
-  num_samples_per_class: 5
+  batch_size: 32
+  num_samples_per_class: 16
   num_workers: 4
-  learning_rate: 1e-3
+  learning_rate: 1e-4
   num_bins: 11
-  num_features: 10
-  train_num_steps: 1000000
+  num_features: 16
+  train_num_steps: 100000
   val_num_steps: 200
   save_interval: 1000
+  patch_size: 32
   seed: 22
