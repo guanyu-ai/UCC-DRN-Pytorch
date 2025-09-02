@@ -13,10 +13,10 @@ args:
   batch_size: 20
   num_samples_per_class: 5
   num_workers: 4
-  learning_rate: 1e-4
+  learning_rate: 1e-3
   num_bins: 11
   num_features: 10
-  train_num_steps: 100000
+  train_num_steps: 1000000
   val_num_steps: 200
   save_interval: 1000
   seed: 22

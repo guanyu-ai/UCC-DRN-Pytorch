@@ -10,7 +10,6 @@ from drn_pytorch.drn import DRN
 torch.autograd.set_detect_anomaly(True)
 
 
-
 class ResBlockZeroPadding(nn.Module):
     def __init__(self, in_channels, out_channels, downsample=False, upsample=False, first_block=False):
         super().__init__()
@@ -36,10 +35,18 @@ class ResBlockZeroPadding(nn.Module):
         )
         self.skip_conv = nn.Conv2d(
             in_channels=self.in_channels,
-            out_channels=self.out_channels,
+            out_channels=self.in_channels,
             kernel_size=1,
             stride=2 if self.downsample else 1
         )
+
+        # if self.downsample:
+        #     self.downsample_conv = nn.Conv2d(
+        #         in_channels=self.in_channels,
+        #         out_channels=self.in_channels,
+        #         kernel_size=1,
+        #         stride=2
+        #     )
 
         nn.init.xavier_uniform_(self.conv1.weight)
         nn.init.constant_(self.conv1.bias, 0.1)
@@ -58,12 +65,19 @@ class ResBlockZeroPadding(nn.Module):
 
         x = F.relu(self.conv1(input_tensor))
         x = F.relu(self.conv2(x))
-        x = F.layer_norm(x, x.shape)
-        if input_tensor.shape != x.shape:   # check if the number of channels are correct.
+        x_shape = x.shape[2:]
+        input_shape = input_tensor.shape[2:]
+        x_filters = x.shape[1]
+        input_filters = input_tensor.shape[1]
+        if x_shape != input_shape:   # check if the number of channels are correct.
             input_tensor = self.skip_conv(input_tensor)
+        if input_filters != x_filters:
+            input_tensor = input_tensor.reshape((-1, 1, input_filters, input_shape[0], input_shape[1]))
+            zero_padding_size = x_filters - input_filters
+            input_tensor = F.pad( input_tensor, (0,0,0,0, zero_padding_size, 0), "constant", 0)
+            input_tensor = input_tensor.reshape((-1, x_filters, x_shape[0], x_shape[1]))
         output = x + input_tensor
         return output
-
 
 class WideResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels, n_layers, downsample=False, upsample=False):
@@ -83,16 +97,6 @@ class WideResidualBlock(nn.Module):
 
     def forward(self, x):
         return self.blocks(x)
-
-
-class Reshape(nn.Module):
-    def __init__(self, *target_shape):
-        super(Reshape, self).__init__()
-        self.target_shape = target_shape
-
-    def forward(self, x):
-        return x.view(x.size(0), *self.target_shape)
-
 
 class UCCModel(nn.Module):
     def __init__(self, cfg):
@@ -205,8 +209,8 @@ class UCCModel(nn.Module):
 
     def forward(self, x, return_reconstruction=False):
         # x shape: (batch_size, num_instances, num_channel, patch_size, patch_size)
-        # reshape x to (batch_size * num_instances, 1, patch_size, patch_size)
         batch_size, num_instances, num_channel, patch_size, _ = x.shape
+        # reshape x to (batch_size * num_instances, 1, patch_size, patch_size)
         x = x.view(-1, num_channel, x.shape[-2], x.shape[-1])
         feature = self.encoder(x)
         # if self.decoder:
@@ -218,6 +222,7 @@ class UCCModel(nn.Module):
         # use kernel density estimation to estimate the distribution of the features
         # output of kde is concatenated features distribution
         feature_distribution = self.kde(feature_, self.num_nodes, self.sigma)
+
         out = self.ucc_classifier(feature_distribution)
         if return_reconstruction:
             reconstruction = self.decoder(feature)
@@ -289,6 +294,7 @@ class UCCModel(nn.Module):
         return feature_distribution
 
 
+
 class UCCDRNModel(UCCModel):
     def __init__(self, cfg):
         super().__init__(cfg)
@@ -343,90 +349,3 @@ class UCCDRNModel(UCCModel):
             ),
             nn.Flatten()
         )
-
-
-class DRNOnlyModel(nn.Module):
-    def __init__(self, cfg):
-        super(DRNOnlyModel, self).__init__()
-        kwargs = {}
-        if "init_method" in cfg.model.drn:
-            self.init_method = cfg.model.drn.init_method
-            if self.init_method == "normal":
-                kwargs["init_method"] = "normal"
-                kwargs["mean"] = cfg.model.drn.init_mean
-                kwargs["std"] = cfg.model.drn.init_std
-            elif self.init_method == "uniform":
-                kwargs["init_method"] = "uniform"
-                kwargs["upper_bound"] = cfg.model.drn.init_upper_bound
-                kwargs["lower_bound"] = cfg.model.drn.init_lower_bound
-        self.drn = nn.Sequential(
-            DRN(cfg.model.encoder.num_features,
-                cfg.model.drn.num_bins,
-                cfg.model.drn.num_nodes,
-                cfg.model.drn.hidden_q,
-                **kwargs
-
-                ),
-            *[DRN(
-                cfg.model.drn.num_nodes,
-                cfg.model.drn.hidden_q,
-                cfg.model.drn.num_nodes,
-                cfg.model.drn.hidden_q,
-                **kwargs
-
-            )
-                for i in range(cfg.model.drn.num_layers-1)],
-            DRN(
-                cfg.model.drn.num_nodes,
-                cfg.model.drn.hidden_q,
-                1,
-                cfg.model.drn.output_bins,
-                **kwargs
-            ),
-            nn.Flatten()
-        )
-        self.num_bins = cfg.model.kde_model.num_bins
-        self.sigma = cfg.model.kde_model.sigma
-        self.num_features = cfg.model.encoder.num_features
-
-    def kde(self, data: torch.Tensor, num_nodes, sigma):
-        device = data.device
-        # data shape: (batch_size, num_instances, num_features)
-        batch_size, num_instances, num_features = data.shape
-
-        # Create sample points
-        k_sample_points = (
-            torch.linspace(0, 1, steps=num_nodes)
-            .repeat(batch_size, num_instances, 1)
-            .to(device)
-        )
-
-        # Calculate constants
-        k_alpha = 1 / np.sqrt(2 * np.pi * sigma**2)
-        k_beta = -1 / (2 * sigma**2)
-
-        # Iterate over features and calculate kernel density estimation for each feature
-        out_list = []
-        for i in range(num_features):
-            one_feature = data[:, :, i: i + 1].repeat(1, 1, num_nodes)
-            k_diff_2 = (k_sample_points - one_feature) ** 2
-            k_result = k_alpha * torch.exp(k_beta * k_diff_2)
-            k_out_unnormalized = k_result.sum(dim=1)
-            k_norm_coeff = k_out_unnormalized.sum(dim=1).view(-1, 1)
-            k_out = k_out_unnormalized / k_norm_coeff.repeat(
-                1, k_out_unnormalized.size(1)
-            )
-            out_list.append(k_out)
-
-        # Concatenate the results
-        concat_out = torch.cat(out_list, dim=-1)
-        return concat_out
-
-    def forward(self, x):
-        x = self.kde(x, self.num_bins, self.sigma)
-        x = x.reshape(-1, self.num_features, self.num_bins)
-        output = self.drn(x)
-        return output
-
-    def compute_loss(self, labels, outputs):
-        return F.cross_entropy(outputs, labels)

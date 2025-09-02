@@ -11,6 +11,7 @@ dotenv.load_dotenv(dotenv.find_dotenv())
 root_dir:str = str(os.getenv("ROOT_DIR"))
 data_dir = os.path.join(root_dir, "data/mnist/splitted_mnist_dataset.npz")
 encoded_data_dir = os.path.join(root_dir, "data/mnist/splitted_mnist_encoded_dataset.npz")
+drn_encoded_data_dir = os.path.join(root_dir, "data/mnist/splitted_drn_mnist_encoded_dataset.npz")encoded_data_dir = os.path.join(root_dir, "data/mnist/splitted_mnist_encoded_dataset.npz")
 
 
 class MnistDataset(Dataset):
@@ -72,6 +73,18 @@ class MnistDataset(Dataset):
         x_test = (x_test - x_test.mean(dim=(2, 3), keepdim=True)) / x_test.std(
             dim=(2, 3), keepdim=True
         )
+        self._x_test = x_test
+        self._y_test = torch.tensor(y_test, dtype=torch.int64)
+        x_test = splitted_dataset["x_test"]
+        y_test = splitted_dataset["y_test"]
+        x_test = torch.tensor(x_test, dtype=torch.float32).unsqueeze(1) / 255
+        print(x_test.std())
+        print(x_test.mean())
+        x_test = (x_test - x_test.mean(dim=(2, 3), keepdim=True)) / x_test.std(
+            dim=(2, 3), keepdim=True
+        )
+        
+        print(x_test.shape[0], "test samples")
         self._x_test = x_test
         self._y_test = torch.tensor(y_test, dtype=torch.int64)
         del splitted_dataset
@@ -184,10 +197,6 @@ class MnistDataset(Dataset):
             val_size = len(self._digit_dict[digit_key]["val_indices"])
             test_size = len(self._digit_dict[digit_key]["test_indices"])
 
-            
-            # random_ind = np.random.randint(
-            #     0, train_size if self.mode=="train" else  val_size if self.mode=="val" else test_size, num_instances
-            # )
             if self.mode=="train":
                 random_ind = np.random.randint(
                     0, train_size, num_instances
@@ -225,7 +234,6 @@ class MnistDataset(Dataset):
 
 
 
-
 class MnistEncodedDataset(MnistDataset):
     def __init__(self, num_instances=2, num_samples_per_class=16, digit_arr=[], ucc_start=1, ucc_end=10, mode="train", length=80000):
         super().__init__(num_instances, num_samples_per_class, digit_arr, ucc_start, ucc_end, mode, length)
@@ -258,7 +266,101 @@ class MnistEncodedDataset(MnistDataset):
         x_val = splitted_dataset["x_val"]
         y_val = splitted_dataset["y_val"]
         x_val = torch.tensor(x_val, dtype=torch.float32)
-        
+
+        print(x_val.shape[0], "val samples")
+
+        self._x_val = x_val
+        self._y_val = torch.tensor(y_val, dtype=torch.int64)
+
+        del x_val
+        del y_val
+        # x_test = splitted_dataset['x_test']
+        # y_test = splitted_dataset['y_test']
+
+        del splitted_dataset
+
+        # reshape to instances
+
+        self._digit_dict = self.get_digit_dict()
+        self._class_dict_train = self.get_class_dict()
+        self._class_dict_val = self.get_class_dict()
+
+        self._labels = self.generate_labels()
+
+    def __getitem__(self, index):
+        # if self.mode = ""
+        # get one bag of a lot of instances of images
+        # shape should be [instance_per_class, *[image dimensions]]
+        class_label = index%self._num_classes   # get a class label
+        class_key = f"class_{class_label}"
+        ind = np.random.randint(0, len(self._class_dict_train[class_key]))
+        elems = self._class_dict_train[class_key][ind, :]
+        num_elems = len(elems)
+        num_instances_per_elem = self._num_instances//num_elems
+        remainder = self._num_instances%num_elems
+        num_instances_arr = np.repeat(num_instances_per_elem, num_elems)
+        num_instances_arr[:remainder]+=1
+
+        indices_list = []
+        for k in range(num_elems):
+            digit_key = f"digit{elems[k]}"  # get digit labels
+            num_instances = num_instances_arr[k]
+            train_size = len(self._digit_dict[digit_key]["train_indices"])
+            val_size = len(self._digit_dict[digit_key]["val_indices"])
+            random_ind = np.random.randint(
+                0, train_size if self.mode=="train" else val_size, num_instances
+            )
+            if self.mode=="train":
+                random_ind = np.random.randint(
+                    0, train_size, num_instances
+                )
+                indices_list += list(
+                    self._digit_dict[digit_key]["train_indices"][random_ind]
+                )
+                samples = self._x_train[indices_list]
+
+            elif self.mode=="val":
+                random_ind = np.random.randint(
+                    0, val_size, num_instances
+                )
+                indices_list += list(
+                    self._digit_dict[digit_key]["val_indices"][random_ind]
+                )
+                samples = self._x_val[indices_list]
+        return samples, class_label
+    
+class DRNMnistEncodedDataset(MnistDataset):
+    def __init__(self, num_instances=2, num_samples_per_class=16, digit_arr=[], ucc_start=1, ucc_end=10, mode="train", length=80000):
+        super().__init__(num_instances, num_samples_per_class, digit_arr, ucc_start, ucc_end, mode, length)
+        self._num_instances = num_instances # number of instances per bag
+        self._num_samples_per_class = num_samples_per_class # number of bags per class in each batch
+        self._digit_arr = digit_arr #  array of digits taken
+        self._ucc_start = ucc_start # smallest ucc class
+        self._ucc_end = ucc_end # largest ucc class
+        self._num_digits = len(self._digit_arr) # number of digits in dataset, in this case is 10(0-9)
+        self._num_classes = self._ucc_end - self._ucc_start + 1
+
+        self.mode = mode
+        self.length = length
+
+        splitted_dataset = np.load(drn_encoded_data_dir)
+        # if self.mode =="train":
+        x_train = splitted_dataset["x_train"]
+        y_train = splitted_dataset["y_train"]
+        x_train = torch.tensor(x_train, dtype=torch.float32)
+
+        print("x_train shape:", x_train.shape)
+        print(x_train.shape[0], "train samples")
+
+        self._x_train = x_train
+        self._y_train = torch.tensor(y_train, dtype=torch.int64)
+        del x_train
+        del y_train
+        # elif self.mode =="val":
+        x_val = splitted_dataset["x_val"]
+        y_val = splitted_dataset["y_val"]
+        x_val = torch.tensor(x_val, dtype=torch.float32)
+
         print(x_val.shape[0], "val samples")
 
         self._x_val = x_val
@@ -314,4 +416,3 @@ class MnistEncodedDataset(MnistDataset):
                 )
                 samples = self._x_val[indices_list]
         return samples, class_label
-

@@ -167,3 +167,13 @@ mlruns/
 outputs/
 data/
 imdb/
+data/*
+
+.ruff_cache
+.virtual_documents
+.zed
+mnist/evaluation/*
+mnist/saved_models/*
+mnist/saved_models_pytorch/*
+mnist/loss_data/*
+mlruns*/

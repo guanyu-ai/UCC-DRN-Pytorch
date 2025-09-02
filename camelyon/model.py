@@ -1,14 +1,13 @@
 import sys
 sys.path.append("../")
-import numpy as np
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from drn_pytorch.drn import DRN
+import torch.nn.functional as F
+import torch.nn as nn
+import torch
+import numpy as np
 
 # from drn import DRNLayer
 torch.autograd.set_detect_anomaly(True)
-
 
 
 class ResBlockZeroPadding(nn.Module):
@@ -40,7 +39,6 @@ class ResBlockZeroPadding(nn.Module):
             kernel_size=1,
             stride=2 if self.downsample else 1
         )
-
         nn.init.xavier_uniform_(self.conv1.weight)
         nn.init.constant_(self.conv1.bias, 0.1)
         nn.init.xavier_uniform_(self.conv2.weight)
@@ -58,7 +56,6 @@ class ResBlockZeroPadding(nn.Module):
 
         x = F.relu(self.conv1(input_tensor))
         x = F.relu(self.conv2(x))
-        x = F.layer_norm(x, x.shape)
         if input_tensor.shape != x.shape:   # check if the number of channels are correct.
             input_tensor = self.skip_conv(input_tensor)
         output = x + input_tensor
@@ -93,7 +90,6 @@ class Reshape(nn.Module):
     def forward(self, x):
         return x.view(x.size(0), *self.target_shape)
 
-
 class UCCModel(nn.Module):
     def __init__(self, cfg):
         super(UCCModel, self).__init__()
@@ -103,50 +99,48 @@ class UCCModel(nn.Module):
         self.num_instances = args.num_instances
         self.num_features = model_cfg.encoder.num_features
         self.num_channels = model_cfg.num_channels
-        self.num_classes = args.ucc_end-args.ucc_start+1
-        self.batch_size = args.num_samples_per_class*self.num_classes
+        self.num_classes = 2
+        self.batch_size = args.batch_size
         self.alpha = model_cfg.loss.alpha
         self.sigma = model_cfg.kde_model.sigma
         self.num_nodes = model_cfg.kde_model.num_bins
         self.encoder = nn.Sequential(
             nn.Conv2d(
-                in_channels=1,
-                out_channels=16,
+                in_channels=cfg.model.encoder.conv_input_channel,
+                out_channels=cfg.model.encoder.conv_output_channel,
                 kernel_size=(3, 3),
                 padding=1),
             WideResidualBlock(
-                in_channels=16,
-                out_channels=32,
-                n_layers=1
+                in_channels=cfg.model.encoder.conv_output_channel,
+                out_channels=cfg.model.encoder.block1_output_channel,
+                n_layers=cfg.model.encoder.block1_num_layer
             ),
             WideResidualBlock(
-                in_channels=32,
-                out_channels=64,
-                n_layers=1,
+                in_channels=cfg.model.encoder.block1_output_channel,
+                out_channels=cfg.model.encoder.block2_output_channel,
+                n_layers=cfg.model.encoder.block2_num_layer,
                 downsample=True
             ),
             WideResidualBlock(
-                in_channels=64,
-                out_channels=128,
-                n_layers=1,
+                in_channels=cfg.model.encoder.block2_output_channel,
+                out_channels=cfg.model.encoder.block3_output_channel,
+                n_layers=cfg.model.encoder.block3_num_layer,
                 downsample=True
             ),
             nn.ReLU(),
             nn.Flatten(),
-            nn.Linear(in_features=6272,
+            nn.Linear(in_features=cfg.model.encoder.flatten_size,
                       out_features=self.num_features, bias=False),
             nn.Sigmoid()
         )
-        nn.init.constant_(self.encoder[0].bias, 0.1)
-        nn.init.xavier_uniform_(self.encoder[0].weight)
         if self.alpha == 1:
             self.decoder = None
         else:
             self.decoder = nn.Sequential(
                 nn.Linear(in_features=self.num_features,
-                          out_features=7*7*128),
+                          out_features=cfg.model.decoder.linear_size),
                 nn.ReLU(),
-                nn.Unflatten(-1, [128, 7, 7]),
+                nn.Unflatten(-1, [128, 8, 8]),
                 WideResidualBlock(
                     in_channels=128, out_channels=64, n_layers=1, upsample=True),
                 WideResidualBlock(
@@ -157,15 +151,14 @@ class UCCModel(nn.Module):
                 nn.Conv2d(in_channels=16, out_channels=self.num_channels,
                           kernel_size=(3, 3), padding=1)
             )
-            # added this recently when comparing models
-            nn.init.constant_(self.decoder[-1].bias, 0.1)
-            nn.init.xavier_uniform_(self.decoder[-1].weight)
-
         self.ucc_classifier = nn.Sequential(
-            nn.Linear(in_features=110, out_features=384),
+            nn.Dropout(0.25),
+            nn.Linear(in_features=self.num_features*self.num_nodes, out_features=384),
             nn.ReLU(),
+            nn.Dropout(0.25),
             nn.Linear(in_features=384, out_features=192),
             nn.ReLU(),
+            nn.Dropout(0.25),
             nn.Linear(in_features=192, out_features=self.num_classes),
             nn.Softmax(dim=-1)
         )
@@ -205,8 +198,8 @@ class UCCModel(nn.Module):
 
     def forward(self, x, return_reconstruction=False):
         # x shape: (batch_size, num_instances, num_channel, patch_size, patch_size)
-        # reshape x to (batch_size * num_instances, 1, patch_size, patch_size)
         batch_size, num_instances, num_channel, patch_size, _ = x.shape
+        # reshape x to (batch_size * num_instances, 1, patch_size, patch_size)
         x = x.view(-1, num_channel, x.shape[-2], x.shape[-1])
         feature = self.encoder(x)
         # if self.decoder:
@@ -218,11 +211,12 @@ class UCCModel(nn.Module):
         # use kernel density estimation to estimate the distribution of the features
         # output of kde is concatenated features distribution
         feature_distribution = self.kde(feature_, self.num_nodes, self.sigma)
+
         out = self.ucc_classifier(feature_distribution)
         if return_reconstruction:
             reconstruction = self.decoder(feature)
             res = reconstruction.view(
-                batch_size, num_instances, 1, patch_size, patch_size)
+                batch_size, num_instances, num_channel, patch_size, patch_size)
             return out, res
         return out
 
@@ -293,32 +287,16 @@ class UCCDRNModel(UCCModel):
     def __init__(self, cfg):
         super().__init__(cfg)
         kwargs = {}
-
-        inits = ["W", "ba", "bq", "lama", "lamq"]
-        for init in inits:
-            method = "_".join(["init", init, "method"])
-            if method in cfg.model.drn:
-                setattr(self, init, cfg.model.drn[method])
-                kwargs[method] = cfg.model.drn[method]
-                if kwargs[method] == "normal":
-                    kwargs[f"init_{init}_mean"] = cfg.model.drn[f"init_{init}_mean"]
-                    kwargs[f"init_{init}_std"] = cfg.model.drn[f"init_{init}_std"]
-                if kwargs[method] == "uniform":
-                    kwargs[f"init_{init}_upper_bound"] = cfg.model.drn[f"init_{init}_upper_bound"]
-                    kwargs[f"init_{init}_lower_bound"] = cfg.model.drn[f"init_{init}_lower_bound"]
-                if kwargs[method] == "constant":
-                    kwargs[f"init_{init}_constant"] = cfg.model.drn[f"init_{init}_constant"]
-        # if "init_method" in cfg.model.drn:
-        #     self.init_method = cfg.model.drn.init_method
-        #     if self.init_method == "normal":
-        #         kwargs["init_method"] = "normal"
-        #         kwargs["mean"] = cfg.model.drn.init_mean
-        #         kwargs["std"] = cfg.model.drn.init_std
-        #     elif self.init_method == "uniform":
-        #         kwargs["init_method"] = "uniform"
-        #         kwargs["upper_bound"] = cfg.model.drn.init_upper_bound
-        #         kwargs["lower_bound"] = cfg.model.drn.init_lower_bound
-
+        if "init_method" in cfg.model.drn:
+            self.init_method = cfg.model.drn.init_method
+            if self.init_method == "normal":
+                kwargs["init_method"] = "normal"
+                kwargs["mean"] = cfg.model.drn.init_mean
+                kwargs["std"] = cfg.model.drn.init_std
+            elif self.init_method == "uniform":
+                kwargs["init_method"] = "uniform"
+                kwargs["upper_bound"] = cfg.model.drn.init_upper_bound
+                kwargs["lower_bound"] = cfg.model.drn.init_lower_bound
         self.ucc_classifier = nn.Sequential(
             DRN(cfg.model.encoder.num_features,
                 cfg.model.drn.num_bins,
@@ -348,40 +326,24 @@ class UCCDRNModel(UCCModel):
 class DRNOnlyModel(nn.Module):
     def __init__(self, cfg):
         super(DRNOnlyModel, self).__init__()
-        kwargs = {}
-        if "init_method" in cfg.model.drn:
-            self.init_method = cfg.model.drn.init_method
-            if self.init_method == "normal":
-                kwargs["init_method"] = "normal"
-                kwargs["mean"] = cfg.model.drn.init_mean
-                kwargs["std"] = cfg.model.drn.init_std
-            elif self.init_method == "uniform":
-                kwargs["init_method"] = "uniform"
-                kwargs["upper_bound"] = cfg.model.drn.init_upper_bound
-                kwargs["lower_bound"] = cfg.model.drn.init_lower_bound
         self.drn = nn.Sequential(
             DRN(cfg.model.encoder.num_features,
                 cfg.model.drn.num_bins,
                 cfg.model.drn.num_nodes,
-                cfg.model.drn.hidden_q,
-                **kwargs
-
+                cfg.model.drn.hidden_q
                 ),
             *[DRN(
                 cfg.model.drn.num_nodes,
                 cfg.model.drn.hidden_q,
                 cfg.model.drn.num_nodes,
-                cfg.model.drn.hidden_q,
-                **kwargs
-
+                cfg.model.drn.hidden_q
             )
                 for i in range(cfg.model.drn.num_layers-1)],
             DRN(
                 cfg.model.drn.num_nodes,
                 cfg.model.drn.hidden_q,
                 1,
-                cfg.model.drn.output_bins,
-                **kwargs
+                cfg.model.drn.output_bins
             ),
             nn.Flatten()
         )
