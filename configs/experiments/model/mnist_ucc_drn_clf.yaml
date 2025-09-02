@@ -26,15 +26,14 @@ decoder:
   # block3_num_layer: 1
   # output_channel: 1
 drn:
-  init_method: "xavier_uniform"
   num_bins: 11
   hidden_q: 100
   num_layers: 1
   num_nodes: 10
-  output_nodes: 1
-  output_bins:
-    4
-    # when tau approaches 0, gumbel softmax behaviour samples like a categorical distribution.
-ucc_classifier: None
+  output_bins: 4
+  output_nodes: 3
+ucc_classifier:
+  dropout_rate: 0.0
+  num_classes: 4
 loss:
-  alpha: 0.5
+  alpha: 1

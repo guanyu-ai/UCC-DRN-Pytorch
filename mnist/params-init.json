@@ -1,0 +1,72 @@
+{
+    "init_method": {
+        "type": "categorical",
+        "range": [
+            "uniform",
+            "normal",
+            "xavier_uniform",
+            "xavier_normal",
+            "kaiming_uniform",
+            "kaiming_normal"
+        ],
+        "aliases": [
+            "model.drn.init_method"
+        ]
+    },
+    "num_bins": {
+        "type": "int",
+        "value": 10,
+        "range": [
+            5,
+            100
+        ],
+        "aliases": [
+            "model.drn.num_bins",
+            "args.num_bins",
+            "model.kde_model.num_bins"
+        ]
+    },
+    "lr": {
+        "type": "float",
+        "value": 0.085,
+        "range": [
+            0.0001,
+            0.1
+        ],
+        "aliases": [
+            "args.learning_rate"
+        ]
+    },
+    "hidden_q": {
+        "type": "int",
+        "range": [
+            4,
+            100
+        ],
+        "aliases": [
+            "model.drn.hidden_q"
+        ]
+    },
+    "num_layers": {
+        "type": "int",
+        "value": 2,
+        "range": [
+            1,
+            10
+        ],
+        "aliases": [
+            "model.drn.num_layers"
+        ]
+    },
+    "num_nodes": {
+        "type": "int",
+        "value": 9,
+        "range": [
+            1,
+            10
+        ],
+        "aliases": [
+            "model.drn.num_nodes"
+        ]
+    }
+}

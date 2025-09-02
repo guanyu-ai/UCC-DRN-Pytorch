@@ -1,0 +1,590 @@
+[
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/fb5a6793dc714cbbb8b27437db62212d/artifacts",
+            "end_time": 1741184857955,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "fb5a6793dc714cbbb8b27437db62212d",
+            "run_name": "thoughtful-cub-499",
+            "run_uuid": "fb5a6793dc714cbbb8b27437db62212d",
+            "start_time": 1741175225967,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9984999999999999,
+                "eval_ucc_loss": 0.5586519837379456,
+                "total_loss": 0.5586519837379456,
+                "train_distilation_loss": 0.00016567563579883426,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7448140382766724
+            },
+            "params": {
+                "hidden_q": "89",
+                "lr": "0.01039552925336782",
+                "num_bins": "7",
+                "num_layers": "5",
+                "num_nodes": "8"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 11:50:23.921524\", \"model_uuid\": \"aabdfa3a474d490782e076defb4871c4\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 11:53:25.406917\", \"model_uuid\": \"bcab837d38634aaeb054183fdc561514\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 12:08:34.254736\", \"model_uuid\": \"2af073188a794dbda3d36a05dbada36a\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 12:11:34.852805\", \"model_uuid\": \"5de39776f15543e7a8d280021c4d97ee\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 12:14:34.712586\", \"model_uuid\": \"3bf361a113b94a04aaa094e989b1a923\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 12:17:35.388374\", \"model_uuid\": \"62d377a8be8c423c8da8c24071df7c04\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 12:20:36.588013\", \"model_uuid\": \"40306dc80b2e453d8df0aab6822fb4c9\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 12:23:39.195595\", \"model_uuid\": \"c8ddcffd8b0d440aa6b8e7cf77000071\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 12:34:11.613534\", \"model_uuid\": \"bb28ae4cb83e4196bf40db9cf8afcc51\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 12:51:14.806049\", \"model_uuid\": \"60e9429d5e304daca549afe5aaafdad8\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 13:17:53.396396\", \"model_uuid\": \"71917e8e78e34936b8bf28ea03d5ec95\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 13:36:47.423786\", \"model_uuid\": \"45bef25528164aab857e689a9bcb6959\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 13:39:09.211253\", \"model_uuid\": \"4e4eddbd788f4c55b28292f2e5eb6529\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"fb5a6793dc714cbbb8b27437db62212d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 14:01:14.697052\", \"model_uuid\": \"cd9bad0e895a4f989f9e6fe2e9460ebd\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "thoughtful-cub-499",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/0334bb28378748f1960f2e6e2ec24048/artifacts",
+            "end_time": 1741175225956,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "0334bb28378748f1960f2e6e2ec24048",
+            "run_name": "shivering-trout-690",
+            "run_uuid": "0334bb28378748f1960f2e6e2ec24048",
+            "start_time": 1741172905552,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9997499999999999,
+                "eval_ucc_loss": 0.5659348368644714,
+                "total_loss": 0.5659348368644714,
+                "train_distilation_loss": 5.586793486145325e-05,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.754561185836792
+            },
+            "params": {
+                "hidden_q": "60",
+                "lr": "0.008293422846718107",
+                "num_bins": "13",
+                "num_layers": "4",
+                "num_nodes": "9"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"0334bb28378748f1960f2e6e2ec24048\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 11:11:13.585565\", \"model_uuid\": \"8249832211344877bc94c1801b97be7f\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"0334bb28378748f1960f2e6e2ec24048\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 11:13:45.973454\", \"model_uuid\": \"f85613e11ff546e3bef81ab429bcec2a\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"0334bb28378748f1960f2e6e2ec24048\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 11:16:17.366643\", \"model_uuid\": \"e90f246765d54087a7d01feb680ff80f\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"0334bb28378748f1960f2e6e2ec24048\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 11:18:49.574367\", \"model_uuid\": \"7d2555b1c0ff4223a1b07fce17f782fd\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"0334bb28378748f1960f2e6e2ec24048\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 11:21:21.516936\", \"model_uuid\": \"8072a58304164895bb28f4505d45cbb4\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "shivering-trout-690",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/bd12d4fab96543138115acd50d3a7412/artifacts",
+            "end_time": 1741172905544,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "bd12d4fab96543138115acd50d3a7412",
+            "run_name": "popular-wren-536",
+            "run_uuid": "bd12d4fab96543138115acd50d3a7412",
+            "start_time": 1741171061033,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 1.0,
+                "eval_ucc_loss": 0.5578346848487854,
+                "total_loss": 0.5578346848487854,
+                "train_distilation_loss": 0.0002617292630020529,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7436923384666443
+            },
+            "params": {
+                "hidden_q": "72",
+                "lr": "0.05687503237037178",
+                "num_bins": "10",
+                "num_layers": "3",
+                "num_nodes": "10"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"bd12d4fab96543138115acd50d3a7412\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:40:08.429574\", \"model_uuid\": \"6a75c74ceb5f40d885b0c302013a0a2a\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"bd12d4fab96543138115acd50d3a7412\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:42:20.588412\", \"model_uuid\": \"38b68c271f754e4ea90111d81c8291c2\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"bd12d4fab96543138115acd50d3a7412\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:44:30.236925\", \"model_uuid\": \"6c768c6912124c4ab30e652b1e89efd0\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"bd12d4fab96543138115acd50d3a7412\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:46:40.757983\", \"model_uuid\": \"424b23ed1bd64418adbac7320e994b5e\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "popular-wren-536",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/5e6f2c3a4eb94e108c786940c5e01286/artifacts",
+            "end_time": 1741171061025,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "5e6f2c3a4eb94e108c786940c5e01286",
+            "run_name": "fortunate-hog-995",
+            "run_uuid": "5e6f2c3a4eb94e108c786940c5e01286",
+            "start_time": 1741168772750,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9995,
+                "eval_ucc_loss": 0.563815176486969,
+                "total_loss": 0.563815176486969,
+                "train_distilation_loss": 0.00010273649968439713,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7517192959785461
+            },
+            "params": {
+                "hidden_q": "86",
+                "lr": "0.037154746301074834",
+                "num_bins": "7",
+                "num_layers": "2",
+                "num_nodes": "7"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"5e6f2c3a4eb94e108c786940c5e01286\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:01:31.144948\", \"model_uuid\": \"5f99b8a8c834447789c1fc6622b2aeb0\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"5e6f2c3a4eb94e108c786940c5e01286\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:04:55.660246\", \"model_uuid\": \"bdeec51cfc884878bd225277c38db7cb\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"5e6f2c3a4eb94e108c786940c5e01286\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:08:20.183228\", \"model_uuid\": \"8ac27c51d87e4eefacb0ebf76a8e6304\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"5e6f2c3a4eb94e108c786940c5e01286\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:10:00.343533\", \"model_uuid\": \"838c72b2ec294a7aaf096c8f83709355\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"5e6f2c3a4eb94e108c786940c5e01286\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:11:41.708998\", \"model_uuid\": \"02c8de3d2f5d4dec9f20ec584e225d38\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"5e6f2c3a4eb94e108c786940c5e01286\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:18:30.733550\", \"model_uuid\": \"da72aa36c9df4a8796ed8e8472f647ad\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"5e6f2c3a4eb94e108c786940c5e01286\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 10:20:11.576532\", \"model_uuid\": \"002404f340f24a7cbad7403f28958d01\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "fortunate-hog-995",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/037b4e93734746e2aa1e513f439b8d47/artifacts",
+            "end_time": 1741168772741,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "037b4e93734746e2aa1e513f439b8d47",
+            "run_name": "redolent-sheep-203",
+            "run_uuid": "037b4e93734746e2aa1e513f439b8d47",
+            "start_time": 1741167565533,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.99625,
+                "eval_ucc_loss": 0.5751438140869141,
+                "total_loss": 0.5751438140869141,
+                "train_distilation_loss": 0.0005579163553193212,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7666724920272827
+            },
+            "params": {
+                "hidden_q": "47",
+                "lr": "0.024418021072834608",
+                "num_bins": "12",
+                "num_layers": "1",
+                "num_nodes": "9"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"037b4e93734746e2aa1e513f439b8d47\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 09:40:55.280492\", \"model_uuid\": \"ebb412692dcd4df4832fb4921fc8e3be\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"037b4e93734746e2aa1e513f439b8d47\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 09:42:09.816287\", \"model_uuid\": \"52d4abd9f35a4afaa76431df4162952a\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"037b4e93734746e2aa1e513f439b8d47\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 09:43:23.812755\", \"model_uuid\": \"cce362f22670467aa51cd05ef3a43c2a\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"037b4e93734746e2aa1e513f439b8d47\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 09:44:37.928333\", \"model_uuid\": \"bd177202e3f94db292dbebf356584a6e\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"037b4e93734746e2aa1e513f439b8d47\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 09:45:51.291117\", \"model_uuid\": \"402cb1ad563a4f6b95b7fc03ffa1273b\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"037b4e93734746e2aa1e513f439b8d47\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 09:47:05.465569\", \"model_uuid\": \"2823a2f20f6f4b9eb4e5116ad4e6aebc\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "redolent-sheep-203",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/928b008450aa4009a575198e47da3f8d/artifacts",
+            "end_time": 1741167565524,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "928b008450aa4009a575198e47da3f8d",
+            "run_name": "adventurous-calf-686",
+            "run_uuid": "928b008450aa4009a575198e47da3f8d",
+            "start_time": 1741165691259,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9997499999999999,
+                "eval_ucc_loss": 0.5586387515068054,
+                "total_loss": 0.5586387515068054,
+                "train_distilation_loss": 6.513059634016827e-05,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7448300123214722
+            },
+            "params": {
+                "hidden_q": "63",
+                "lr": "0.04165353986281964",
+                "num_bins": "6",
+                "num_layers": "4",
+                "num_nodes": "10"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"928b008450aa4009a575198e47da3f8d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 09:11:02.044483\", \"model_uuid\": \"e8eb72a6ae3c464287beb3e993039821\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"928b008450aa4009a575198e47da3f8d\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 09:13:35.122693\", \"model_uuid\": \"603ead49e41e4744a227d48894beb1dd\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "adventurous-calf-686",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/63ed5f26ccb048a78f92ba3c4d6e2cc7/artifacts",
+            "end_time": 1741163729308,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "63ed5f26ccb048a78f92ba3c4d6e2cc7",
+            "run_name": "fortunate-mule-124",
+            "run_uuid": "63ed5f26ccb048a78f92ba3c4d6e2cc7",
+            "start_time": 1741162495590,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9995,
+                "eval_ucc_loss": 0.5580100417137146,
+                "total_loss": 0.5580100417137146,
+                "train_distilation_loss": 0.0002113240770995617,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7439429759979248
+            },
+            "params": {
+                "hidden_q": "55",
+                "lr": "0.03292351474617201",
+                "num_bins": "5",
+                "num_layers": "2",
+                "num_nodes": "10"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"63ed5f26ccb048a78f92ba3c4d6e2cc7\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 08:16:51.345005\", \"model_uuid\": \"e0f3eb030a364ee19f7c3cd3b715d37b\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"63ed5f26ccb048a78f92ba3c4d6e2cc7\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 08:18:31.201405\", \"model_uuid\": \"7276bec27bb64bfb8398fece224b1bee\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "fortunate-mule-124",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/1e9b222e49f848d7a7976af0fed01b0a/artifacts",
+            "end_time": 1741157893100,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "1e9b222e49f848d7a7976af0fed01b0a",
+            "run_name": "amazing-dog-124",
+            "run_uuid": "1e9b222e49f848d7a7976af0fed01b0a",
+            "start_time": 1741155923389,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.99725,
+                "eval_ucc_loss": 0.5581871271133423,
+                "total_loss": 0.5581871271133423,
+                "train_distilation_loss": 0.0002109257475240156,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7441791892051697
+            },
+            "params": {
+                "hidden_q": "84",
+                "lr": "0.04326071788080663",
+                "num_bins": "18",
+                "num_layers": "2",
+                "num_nodes": "7"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"1e9b222e49f848d7a7976af0fed01b0a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 06:27:21.660539\", \"model_uuid\": \"5424360cc6f34490a1703d2fb7615b3b\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"1e9b222e49f848d7a7976af0fed01b0a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 06:29:02.875182\", \"model_uuid\": \"de64ef27c55040859ee640fdbe0c50b8\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"1e9b222e49f848d7a7976af0fed01b0a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 06:32:26.284455\", \"model_uuid\": \"178acd19619745ba8c1318c36568aed0\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"1e9b222e49f848d7a7976af0fed01b0a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 06:34:07.517539\", \"model_uuid\": \"3f4c8399130241a8bdde91538eea3eb6\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"1e9b222e49f848d7a7976af0fed01b0a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 06:40:59.803423\", \"model_uuid\": \"cbc3c78300be447bbbbc87e6f6bb510b\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "amazing-dog-124",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/b824bac6cee04dc8ba711944585b27a3/artifacts",
+            "end_time": 1741154174723,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "b824bac6cee04dc8ba711944585b27a3",
+            "run_name": "serious-finch-53",
+            "run_uuid": "b824bac6cee04dc8ba711944585b27a3",
+            "start_time": 1741152196569,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9997499999999999,
+                "eval_ucc_loss": 0.558197557926178,
+                "total_loss": 0.558197557926178,
+                "train_distilation_loss": 0.00040324931615032256,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7441290020942688
+            },
+            "params": {
+                "hidden_q": "47",
+                "lr": "0.017516520252492403",
+                "num_bins": "14",
+                "num_layers": "3",
+                "num_nodes": "5"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"b824bac6cee04dc8ba711944585b27a3\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 05:25:34.693311\", \"model_uuid\": \"8bf1e85e72814c2db06c7adb2e2575a8\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"b824bac6cee04dc8ba711944585b27a3\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 05:27:35.975508\", \"model_uuid\": \"2c53aec6671d4a8085484a84dd1ac555\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"b824bac6cee04dc8ba711944585b27a3\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 05:29:38.002515\", \"model_uuid\": \"d41e9230bfcb4a6fac195023e7c04ae3\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"b824bac6cee04dc8ba711944585b27a3\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 05:35:45.939172\", \"model_uuid\": \"2937b519a82b4580b5997524ea661658\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "serious-finch-53",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/53a72c1732d44e248c8b6f788d109844/artifacts",
+            "end_time": 1741142194624,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "53a72c1732d44e248c8b6f788d109844",
+            "run_name": "dapper-trout-584",
+            "run_uuid": "53a72c1732d44e248c8b6f788d109844",
+            "start_time": 1741138916721,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9997499999999999,
+                "eval_ucc_loss": 0.558076798915863,
+                "total_loss": 0.558076798915863,
+                "train_distilation_loss": 0.0004243215953465551,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7439609169960022
+            },
+            "params": {
+                "hidden_q": "55",
+                "lr": "0.03414037639810286",
+                "num_bins": "16",
+                "num_layers": "3",
+                "num_nodes": "8"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"53a72c1732d44e248c8b6f788d109844\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 01:44:18.799671\", \"model_uuid\": \"e867ef1ee3e84a4e979ae86814018611\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"53a72c1732d44e248c8b6f788d109844\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 01:46:23.524933\", \"model_uuid\": \"8cc13a59ae5a46e8973f0b0f0fb4aaa3\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"53a72c1732d44e248c8b6f788d109844\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 01:48:28.024552\", \"model_uuid\": \"989cca3098e74d9291fcc651837db906\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"53a72c1732d44e248c8b6f788d109844\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 01:50:33.707105\", \"model_uuid\": \"3ced1b1ee17c424887ab405f73ebc644\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"53a72c1732d44e248c8b6f788d109844\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 01:52:38.640545\", \"model_uuid\": \"17fc769da99b478e8f0afaf3f947445e\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"53a72c1732d44e248c8b6f788d109844\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 02:07:11.082455\", \"model_uuid\": \"7390946ceeab4c4b98475c6dca6e1d01\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"53a72c1732d44e248c8b6f788d109844\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 02:13:28.132503\", \"model_uuid\": \"e25d5e1e45724768b5d1c519933d5a96\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"53a72c1732d44e248c8b6f788d109844\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 02:15:33.226809\", \"model_uuid\": \"9d84f5a59ade40cbb9cb50f73b2a4b4b\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "dapper-trout-584",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/36b0d119912d4b46aa8a8659d08b734b/artifacts",
+            "end_time": 1741138916712,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "36b0d119912d4b46aa8a8659d08b734b",
+            "run_name": "incongruous-ray-970",
+            "run_uuid": "36b0d119912d4b46aa8a8659d08b734b",
+            "start_time": 1741136152345,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9997499999999999,
+                "eval_ucc_loss": 0.557868242263794,
+                "total_loss": 0.557868242263794,
+                "train_distilation_loss": 0.00020116740779485554,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7437572479248047
+            },
+            "params": {
+                "hidden_q": "59",
+                "lr": "0.03372369708403619",
+                "num_bins": "6",
+                "num_layers": "2",
+                "num_nodes": "10"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"36b0d119912d4b46aa8a8659d08b734b\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 00:57:49.538426\", \"model_uuid\": \"de0d1305a96e498bbca6e454305ada94\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"36b0d119912d4b46aa8a8659d08b734b\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 00:59:29.900720\", \"model_uuid\": \"418609009e204779bcef7147bc3d334c\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"36b0d119912d4b46aa8a8659d08b734b\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 01:01:09.242247\", \"model_uuid\": \"dc894be71654499587b61b31a847d627\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"36b0d119912d4b46aa8a8659d08b734b\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 01:06:11.896590\", \"model_uuid\": \"3ce78b63a1df4aefb5a6aa94bbebc5b1\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"36b0d119912d4b46aa8a8659d08b734b\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 01:07:52.389684\", \"model_uuid\": \"2dad02a7022c4df794b7c413d0584a91\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"36b0d119912d4b46aa8a8659d08b734b\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 01:24:52.565441\", \"model_uuid\": \"459cbd42b23549b79ca643ba1c20ed3f\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "incongruous-ray-970",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/b44135ad417048419a8777be80e40ed8/artifacts",
+            "end_time": 1741136152336,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "b44135ad417048419a8777be80e40ed8",
+            "run_name": "clean-lynx-63",
+            "run_uuid": "b44135ad417048419a8777be80e40ed8",
+            "start_time": 1741134361774,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9982500000000001,
+                "eval_ucc_loss": 0.5607832074165344,
+                "total_loss": 0.5607832074165344,
+                "train_distilation_loss": 0.00019332056399434805,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7476465106010437
+            },
+            "params": {
+                "hidden_q": "98",
+                "lr": "0.04981079639765696",
+                "num_bins": "25",
+                "num_layers": "1",
+                "num_nodes": "10"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"b44135ad417048419a8777be80e40ed8\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 00:27:36.760064\", \"model_uuid\": \"cc309bab0bb7421491b4315967f5a891\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"b44135ad417048419a8777be80e40ed8\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 00:28:55.563132\", \"model_uuid\": \"dd80bc8174594cb0ba618edcb22fe8d2\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"b44135ad417048419a8777be80e40ed8\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 00:30:14.084190\", \"model_uuid\": \"e0fa42444958421c8885789887ce55f3\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"b44135ad417048419a8777be80e40ed8\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 00:31:31.769086\", \"model_uuid\": \"06aba4a5698c49968d9efdec66df0ef1\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"b44135ad417048419a8777be80e40ed8\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 00:37:49.215169\", \"model_uuid\": \"6d01fc2921544db99b5ca60ce6717d97\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"b44135ad417048419a8777be80e40ed8\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-05 00:43:35.371191\", \"model_uuid\": \"81bf90e675bc46b491d51d7ce5f58abb\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "clean-lynx-63",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/8a31c548cfe64909810ab7d33fd90d8a/artifacts",
+            "end_time": 1741121198819,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "8a31c548cfe64909810ab7d33fd90d8a",
+            "run_name": "trusting-snake-847",
+            "run_uuid": "8a31c548cfe64909810ab7d33fd90d8a",
+            "start_time": 1741117851228,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 1.0,
+                "eval_ucc_loss": 0.5584518909454346,
+                "total_loss": 0.5584518909454346,
+                "train_distilation_loss": 0.00010911704885074869,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7445661425590515
+            },
+            "params": {
+                "hidden_q": "68",
+                "lr": "0.02463862569153923",
+                "num_bins": "8",
+                "num_layers": "5",
+                "num_nodes": "10"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"8a31c548cfe64909810ab7d33fd90d8a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 19:54:02.871752\", \"model_uuid\": \"a9a54cb3d48645b7a02d2b49b44abbe0\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"8a31c548cfe64909810ab7d33fd90d8a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 19:56:57.479592\", \"model_uuid\": \"3438f957985a4bd3bf876414cd08c262\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"8a31c548cfe64909810ab7d33fd90d8a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 19:59:53.482967\", \"model_uuid\": \"83a2d99e5ed24a60af3893496140081c\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"8a31c548cfe64909810ab7d33fd90d8a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 20:02:46.735877\", \"model_uuid\": \"f75830340ecf48c0a9090d0e6cd21a1c\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"8a31c548cfe64909810ab7d33fd90d8a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 20:08:38.098537\", \"model_uuid\": \"d98219c425d541ed8a889a8c27edbbe2\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"8a31c548cfe64909810ab7d33fd90d8a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 20:11:30.048912\", \"model_uuid\": \"4227f32cb3e446a185654723951ac356\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"8a31c548cfe64909810ab7d33fd90d8a\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 20:17:19.577551\", \"model_uuid\": \"d80b13fe25bd4b69bc94747d6f7cc87a\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "trusting-snake-847",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    },
+    {
+        "info": {
+            "artifact_uri": "file:///D:/UCC-DRN-Pytorch/mnist/mlruns/380446538050732248/6cd8d0065b9f4c9883462ef396bf6794/artifacts",
+            "end_time": 1741114924241,
+            "experiment_id": "380446538050732248",
+            "lifecycle_stage": "active",
+            "run_id": "6cd8d0065b9f4c9883462ef396bf6794",
+            "run_name": "bemused-turtle-882",
+            "run_uuid": "6cd8d0065b9f4c9883462ef396bf6794",
+            "start_time": 1741112799900,
+            "status": "FINISHED",
+            "user_id": "guanyu"
+        },
+        "data": {
+            "metrics": {
+                "eval_ucc_acc": 0.9947499999999999,
+                "eval_ucc_loss": 0.5578930974006653,
+                "total_loss": 0.5578930974006653,
+                "train_distilation_loss": 0.0001978030486498028,
+                "train_ucc_acc": 1.0,
+                "train_ucc_loss": 0.7437915205955505
+            },
+            "params": {
+                "hidden_q": "5",
+                "lr": "0.08515622697263604",
+                "num_bins": "29",
+                "num_layers": "2",
+                "num_nodes": "9"
+            },
+            "tags": {
+                "mlflow.log-model.history": "[{\"run_id\": \"6cd8d0065b9f4c9883462ef396bf6794\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 18:28:33.594087\", \"model_uuid\": \"f52db3cba50a4ffaa7433aa527eee511\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"6cd8d0065b9f4c9883462ef396bf6794\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 18:30:15.396894\", \"model_uuid\": \"9b58ae95f7ca47b992c26546fcfee652\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"6cd8d0065b9f4c9883462ef396bf6794\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 18:33:37.760748\", \"model_uuid\": \"469c778721864036b65d8f13ed53d4c7\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}, {\"run_id\": \"6cd8d0065b9f4c9883462ef396bf6794\", \"artifact_path\": \"best_model.pth\", \"utc_time_created\": \"2025-03-04 18:45:26.098594\", \"model_uuid\": \"083d3b408ef54e8ca3770a8aae74e146\", \"flavors\": {\"pytorch\": {\"model_data\": \"data\", \"pytorch_version\": \"2.6.0+cu118\", \"code\": null}, \"python_function\": {\"pickle_module_name\": \"mlflow.pytorch.pickle_module\", \"loader_module\": \"mlflow.pytorch\", \"python_version\": \"3.11.5\", \"data\": \"data\", \"env\": {\"conda\": \"conda.yaml\", \"virtualenv\": \"python_env.yaml\"}}}}]",
+                "mlflow.runName": "bemused-turtle-882",
+                "mlflow.source.git.commit": "8e08619b27da277966831a200de755d2adc6ea6b",
+                "mlflow.source.name": ".\\train_distil.py",
+                "mlflow.source.type": "LOCAL",
+                "mlflow.user": "guanyu"
+            }
+        },
+        "inputs": {
+            "dataset_inputs": []
+        }
+    }
+]

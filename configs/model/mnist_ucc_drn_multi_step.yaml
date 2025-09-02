@@ -15,16 +15,15 @@ encoder:
   flatten_size: 6272
   num_features: 10
 decoder:
-  None
-  # linear_size: 6272
-  # reshape_size: [7, 7, 128]
-  # block1_output_channel: 64
-  # block1_num_layer: 1
-  # block2_output_channel: 32
-  # block2_num_layer: 1
-  # block3_output_channel: 16
-  # block3_num_layer: 1
-  # output_channel: 1
+  linear_size: 6272
+  reshape_size: [7, 7, 128]
+  block1_output_channel: 64
+  block1_num_layer: 1
+  block2_output_channel: 32
+  block2_num_layer: 1
+  block3_output_channel: 16
+  block3_num_layer: 1
+  output_channel: 1
 drn:
   init_method: "xavier_uniform"
   num_bins: 11
@@ -37,4 +36,4 @@ drn:
     # when tau approaches 0, gumbel softmax behaviour samples like a categorical distribution.
 ucc_classifier: None
 loss:
-  alpha: 0.5
+  alpha: -1

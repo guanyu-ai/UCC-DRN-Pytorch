@@ -39,25 +39,30 @@ def get_or_create_experiment(experiment_name):
         return mlflow.create_experiment(experiment_name)
 
 
-def parse_experiment_runs_to_optuna_study(experiment_name:str, study_name:str):
+def parse_experiment_runs_to_optuna_study(experiment_name:str, study_name:str, cfg_name:str, params_file:str="params.json", experiments=False):
     study = optuna.create_study(study_name=study_name, direction="maximize")
     with initialize(version_base=None, config_path="../configs"):
-        cfg = compose(config_name="train_drn")
-    with open("params.json", "r") as file:
+        cfg = compose(config_name=cfg_name)
+    if experiments:
+        cfg.model = cfg.experiments
+    with open(params_file, "r") as file:
         params_config:dict = json.loads(file.read())
     params = {}
     for key, value in params_config.items():
         value_= eval(str(f"cfg.{value['aliases'][0]}"))
-        if isinstance(value_, int):
-            distribution = optuna.distributions.IntDistribution(*value["range"])
-        elif isinstance(value_, float):
-            distribution = optuna.distributions.FloatDistribution(*value["range"])
-        else:
-            distribution = None
-        params[key] = {
-            "value": value_,
-            "distribution": distribution
-        }
+        if "value" not in value:
+            if isinstance(value_, int):
+                distribution = optuna.distributions.IntDistribution(*value["range"])
+            elif isinstance(value_, float):
+                distribution = optuna.distributions.FloatDistribution(*value["range"])
+            elif isinstance(value_, str):
+                distribution = optuna.distributions.CategoricalDistribution(value["range"])
+            else:
+                distribution = None
+            params[key] = {
+                "value": value_,
+                "distribution": distribution
+            }
 
 
     if experiment := mlflow.get_experiment_by_name(experiment_name):

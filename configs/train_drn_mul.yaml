@@ -2,7 +2,7 @@ defaults:
   - _self_
   - model: mnist_ucc_drn.yaml
   # experiment configs allow for version control of specific hyperparameters
-  - experiments: model\\mnist_ucc_drn_init.yaml
+  - experiment: null
 args:
   dataset: mnist
   model_dir: saved_models/
@@ -14,6 +14,7 @@ args:
   num_samples_per_class: 5
   num_workers: 4
   learning_rate: 1e-4
+  lr_multiplier: 10
   num_bins: 11
   num_features: 10
   train_num_steps: 100000

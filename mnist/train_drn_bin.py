@@ -33,12 +33,12 @@ def set_random_seed(seed):
 def init_model_and_optimizer(args, model_cfg, device):
     model = UCCDRNModel(model_cfg).to(device)
     # optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
-    param_group_names = [name for name,_ in model.named_parameters()]
+    param_group_names = [name for name, _ in model.named_parameters()]
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
-    for name, param_group in zip(param_group_names, optimizer.param_groups):
-        if "encoder" in name:
-            param_group['lr'] = args.learning_rate*args.lr_multiplier
-        print(f'    {name}: {param_group["lr"]}')
+    # for name, param_group in zip(param_group_names, optimizer.param_groups):
+    #     if "encoder" in name:
+    #         param_group['lr'] = args.learning_rate*args.lr_multiplier
+    #     print(f'    {name}: {param_group["lr"]}')
     return model, optimizer
 
 
@@ -68,6 +68,24 @@ def init_dataloader(args):
         ucc_end=args.ucc_end,
         length=val_dataset_len,
     )
+    # else:
+    #     train_dataset_len = args.train_num_steps * args.batch_size
+    #     train_dataset = CamelyonUCCDataset(
+    #         mode="train",
+    #         num_instances=args.num_instances,
+    #         data_augment=args.data_augment,
+    #         patch_size=args.patch_size,
+    #         dataset_len=train_dataset_len,
+    #     )
+    #     val_dataset_len = args.val_num_steps * args.batch_size
+    #     val_dataset = CamelyonUCCDataset(
+    #         mode="val",
+    #         num_instances=args.num_instances,
+    #         data_augment=args.data_augment,
+    #         patch_size=args.patch_size,
+    #         dataset_len=val_dataset_len,
+    #     )
+    # create dataloader
     train_loader = DataLoader(
         train_dataset,
         batch_size=args.batch_size,
@@ -83,7 +101,7 @@ def init_dataloader(args):
     return train_loader, val_loader
 
 
-def evaluate(model, val_loader, device)-> Tuple[np.float32, np.float32]:
+def evaluate(model, val_loader, device) -> Tuple[np.float32, np.float32]:
     model.eval()
     val_loss_list = []
     val_acc_list = []
@@ -96,7 +114,8 @@ def evaluate(model, val_loader, device)-> Tuple[np.float32, np.float32]:
                 ucc_val_loss = F.cross_entropy(ucc_logits, batch_labels)
                 # acculate accuracy
                 _, ucc_predicts = torch.max(ucc_logits, dim=1)
-                acc = torch.sum(ucc_predicts == batch_labels).item() / len(batch_labels)
+                acc = torch.sum(
+                    ucc_predicts == batch_labels).item() / len(batch_labels)
                 val_acc_list.append(acc)
                 val_loss_list.append(ucc_val_loss.item())
             else:
@@ -104,7 +123,8 @@ def evaluate(model, val_loader, device)-> Tuple[np.float32, np.float32]:
                 ucc_val_loss = F.cross_entropy(ucc_logits, batch_labels)
                 # acculate accuracy
                 _, ucc_predicts = torch.max(ucc_logits, dim=1)
-                acc = torch.sum(ucc_predicts == batch_labels).item() / len(batch_labels)
+                acc = torch.sum(
+                    ucc_predicts == batch_labels).item() / len(batch_labels)
                 val_acc_list.append(acc)
                 val_loss_list.append(ucc_val_loss.item())
     return np.mean(val_loss_list), np.mean(val_acc_list)
@@ -122,14 +142,14 @@ def train(args, model, optimizer, lr_scheduler, train_loader, val_loader, device
         batch_labels = batch_labels.to(device)
         optimizer.zero_grad()
 
-        if model.alpha==1:
+        if model.alpha == 1:
             ucc_logits = model(batch_samples, batch_labels)
-            loss:torch.Tensor = model.compute_loss(
+            loss: torch.Tensor = model.compute_loss(
                 labels=batch_labels,
                 output=ucc_logits
             )
         else:
-            ucc_logits, reconstruction= model(batch_samples, batch_labels)
+            ucc_logits, reconstruction = model(batch_samples, batch_labels)
             loss = model.compute_loss(
                 inputs=batch_samples,
                 labels=batch_labels,
@@ -137,62 +157,133 @@ def train(args, model, optimizer, lr_scheduler, train_loader, val_loader, device
                 reconstruction=reconstruction
             )
 
-
         loss.backward()
-       
+
         optimizer.step()
         step += 1
 
         if step % 10 == 0:
             # lr_scheduler.step()
             with torch.no_grad():
-                grad_log = {name: torch.mean(param.grad).cpu().item(
-                ) for name, param in model.named_parameters()}
-                mlflow.log_metrics(grad_log, step=step)
                 _, pred = torch.max(ucc_logits, dim=1)
-                accuracy = torch.sum(pred.flatten()==batch_labels.flatten())/len(batch_labels)
-            mlflow.log_metrics({"train_ucc_loss": loss.detach().item(), "train_ucc_acc": float(accuracy)}, step=step)
+                accuracy = torch.sum(
+                    pred.flatten() == batch_labels.flatten())/len(batch_labels)
+            mlflow.log_metrics({"train_ucc_loss": loss.detach(
+            ).item(), "train_ucc_acc": float(accuracy)}, step=step)
 
         if step % args.save_interval == 0:
             eval_loss, eval_acc = evaluate(model, val_loader, device)
-            print(f"step: {step}, eval loss: {eval_loss}, eval acc: {eval_acc}")
-            mlflow.log_metrics({"eval_ucc_loss": loss.item(), "eval_ucc_acc": float(eval_acc)}, step=step)
+            print(
+                f"step: {step}, eval loss: {eval_loss}, eval acc: {eval_acc}")
+            mlflow.log_metrics(
+                {"eval_ucc_loss": loss.item(), "eval_ucc_acc": float(eval_acc)}, step=step)
             # early stop
             if eval_acc > best_eval_acc:
-                patience=10
+                patience = 10
                 best_eval_acc = eval_acc
+                # save model
+                # save_path = os.path.join(output_dir, f"{args.model_name}_best.pth")
+                # put eval loss and acc in model state dict
+                # save_dict = {
+                #     "model_state_dict": model.state_dict(),
+                #     "optimizer_state_dict": optimizer.state_dict(),
+                #     "eval_loss": eval_loss,
+                #     "eval_acc": eval_acc,
+                #     "step": step,
+                # }
                 mlflow.pytorch.log_model(
                     model,
                     "best_model.pth"
                 )
                 # torch.save(save_dict, save_path)
             else:
-                patience-=1
+                patience -= 1
 
-            if patience<=0:
+            if patience <= 0:
+                break
+            if step==10000:
                 break
             model.train()
 
     print("Training finished!!!")
     return best_eval_acc
 
-def objective(trial:optuna.Trial):
+
+# @hydra.main(version_base=None, config_path="../configs", config_name="train_drn.yaml")
+# def main(cfg: DictConfig) -> None:
+#     # with mlflow.start_run():
+
+#     device = torch.device("cuda" if torch.cuda.is_available() else "mps")
+#     print("device:", device)
+#     args = cfg.args
+#     print("args: ", args)
+#     print("model: ", cfg.model)
+#     # set random seed
+#     set_random_seed(args.seed)
+#     # set model save dir
+#     if not os.path.exists(args.model_dir):
+#         os.makedirs(args.model_dir)
+#     # init model and optimizer
+#     model, optimizer = init_model_and_optimizer(args, cfg, device)
+#     train_loader, val_loader = init_dataloader(args)
+#     train(args, model, optimizer, train_loader, val_loader, device)
+#
+
+def objective(trial: optuna.Trial):
     with mlflow.start_run(nested=True):
         # cfg = OmegaConf.load("../configs/train_drn.yaml")
         with initialize(version_base=None, config_path="../configs"):
-            cfg = compose(config_name="train_drn_mul")
-        # cfg.model = cfg.experiments
-        with open("params.json", "r") as file:
-            params_config = json.loads(file.read())
+            cfg = compose(config_name="train_drn")
+        # with open("params.json", "r") as file:
+        #     params_config = json.loads(file.read())
 
-        for key, value in params_config.items():
-            if value["type"]=="int":
-                v = trial.suggest_int(key, value["range"][0], value["range"][1])
+        defaults = {
+            "num_bins": {
+                "type": "int",
+                "value": 10,
+                "range": [5,100],
+                "aliases": [
+                    "model.drn.num_bins",
+                    "args.num_bins",
+                    "model.kde_model.num_bins"
+                ]
+            },
+            "lr": {
+                "type": "float",
+                "value": 0.085,
+                "range": [0.0001, 0.1],
+                "aliases": ["args.learning_rate"]
+            },
+            "hidden_q": {
+                "type": "int",
+                "range": [4, 100],
+                "aliases": ["model.drn.hidden_q"]
+            },
+            "num_layers": {
+                "type": "int",
+                "value": 2,
+                "range": [1, 10],
+                "aliases": ["model.drn.num_layers"]
+            },
+            "num_nodes": {
+                "type": "int",
+                "value": 9,
+                "range": [1, 10],
+                "aliases": ["model.drn.num_nodes"]
+            }
+        }
+        for key, value in defaults.items():
+            if "value" in value:
+                v = value["value"]
             else:
-                v = trial.suggest_float(key, value["range"][0], value["range"][1])
+                if value["type"]=="int":
+                    v = trial.suggest_int(key, value["range"][0], value["range"][1])
+                else:
+                    v = trial.suggest_float(key, value["range"][0], value["range"][1])
             for a in value["aliases"]:
                 exec(f"cfg.{a} = {v}")
 
+        print(cfg)
         mlflow.log_dict(dict(OmegaConf.to_object(cfg)), "config.yaml")
         params = trial.params
         for key, value in params.items():
@@ -203,13 +294,14 @@ def objective(trial:optuna.Trial):
         model, optimizer = init_model_and_optimizer(args, cfg, device)
         train_loader, val_loader = init_dataloader(args)
         print(cfg)
-        best_acc = train(args, model, optimizer, None, train_loader, val_loader, device)
+        best_acc = train(args, model, optimizer, None,
+                         train_loader, val_loader, device)
     return best_acc
 
 
 if __name__ == "__main__":
     mlflow.set_tracking_uri("mlruns")
-    run_name = "ucc-drn-layer-norm"
+    run_name = "ucc-drn-bin-2"
     experiment_id = get_or_create_experiment(experiment_name=run_name)
     mlflow.set_experiment(experiment_id=experiment_id)
 
@@ -217,14 +309,6 @@ if __name__ == "__main__":
         experiment_name=run_name,
         study_name=run_name,
         cfg_name="train_drn",
-        params_file="params-init.json",
-        experiments=True
+        params_file="params-bin.json"
     )
-    study.enqueue_trial({
-        "num_bins": 11,
-        "lr": 0.033,
-        "num_layers": 2,
-        "num_nodes": 10,
-        "hidden_q": 4
-    })
-    study.optimize(func=objective, n_trials=30, show_progress_bar=True)
+    study.optimize(func=objective, n_trials=100, show_progress_bar=True)
