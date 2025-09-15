@@ -177,3 +177,4 @@ mnist/saved_models/*
 mnist/saved_models_pytorch/*
 mnist/loss_data/*
 mlruns*/
+*.pt

@@ -11,7 +11,8 @@ dotenv.load_dotenv(dotenv.find_dotenv())
 root_dir:str = str(os.getenv("ROOT_DIR"))
 data_dir = os.path.join(root_dir, "data/mnist/splitted_mnist_dataset.npz")
 encoded_data_dir = os.path.join(root_dir, "data/mnist/splitted_mnist_encoded_dataset.npz")
-drn_encoded_data_dir = os.path.join(root_dir, "data/mnist/splitted_drn_mnist_encoded_dataset.npz")encoded_data_dir = os.path.join(root_dir, "data/mnist/splitted_mnist_encoded_dataset.npz")
+drn_encoded_data_dir = os.path.join(root_dir, "data/mnist/splitted_drn_mnist_encoded_dataset.npz")
+encoded_data_dir = os.path.join(root_dir, "data/mnist/splitted_mnist_encoded_dataset.npz")
 
 
 class MnistDataset(Dataset):
@@ -93,7 +94,7 @@ class MnistDataset(Dataset):
 
         self._digit_dict = self.get_digit_dict()
         self._class_dict_train = self.get_class_dict()
-        self._class_dict_val = self.get_class_dict()
+        # self._class_dict_val = self.get_class_dict()
 
         self._labels = self.generate_labels()
 

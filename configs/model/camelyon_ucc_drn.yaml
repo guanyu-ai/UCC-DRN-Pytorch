@@ -26,8 +26,8 @@ decoder:
 drn:
   num_bins: 11
   hidden_q: 100
-  num_layers: 1
-  num_nodes: 12
+  num_layers: 2
+  num_nodes: 9
   init_method: "uniform"
   init_upper_bound: 0.5
   init_lower_bound: -0.5
