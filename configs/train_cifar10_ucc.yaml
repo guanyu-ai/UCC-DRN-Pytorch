@@ -1,17 +1,17 @@
 defaults:
   - _self_
-  - model: cifar10_ucc_drn.yaml
+  - model: cifar10_ucc.yaml
   # experiment configs allow for version control of specific hyperparameters
   - experiment: null
 args:
   dataset: cifar10
   model_dir: saved_models/
-  model_name: cifar10_ucc_drn
+  model_name: cifar10_ucc
   num_instances: 32
   ucc_start: 1
   ucc_end: 4
-  batch_size: 15
-  num_samples_per_class: 5
+  batch_size: 2
+  num_samples_per_class: 3
   num_workers: 4
   learning_rate: 1e-4
   num_bins: 11

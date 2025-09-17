@@ -1,0 +1,52 @@
+num_channels: 3
+input_shape: [28, 28, 1]
+kde_model:
+  num_bins: 11
+  sigma: 0.1
+encoder:
+  conv_input_channel: 3
+  conv_output_channel: 16
+  block1_output_channel: 321
+  block1_num_layer: 1
+  block2_output_channel: 64
+  block2_num_layer: 1
+  block3_output_channel: 128
+  block3_num_layer: 1
+  flatten_size: 8192
+  num_features: 10
+decoder:
+  linear_size: 8192
+  reshape_size: [7, 7, 128]
+  block1_output_channel: 64
+  block1_num_layer: 1
+  block2_output_channel: 32
+  block2_num_layer: 1
+  block3_output_channel: 16
+  block3_num_layer: 1
+  output_channel: 3
+drn:
+  num_bins: 11
+  hidden_q: 100
+  num_layers: 2
+  num_nodes: 9
+  init_method: "uniform"
+  init_upper_bound: -0.5
+  init_lower_bound: 0.5
+  # init_ba_method: "uniform"
+  # init_ba_upper_bound: 0.333
+  # init_ba_lower_bound: -0.333
+  # init_bq_method: "uniform"
+  # init_bq_upper_bound: 0.333
+  # init_bq_lower_bound: -0.333
+  # init_lama_method: "uniform"
+  # init_lama_upper_bound: 1 
+  # init_lama_lower_bound: 0
+  # init_lamq_method: "uniform"
+  # init_lamq_upper_bound: 1
+  # init_lamq_lower_bound: 0
+  output_bins:
+    4
+    # when tau approaches 0, gumbel softmax behaviour samples like a categorical distribution.
+ucc_classifier: None
+loss:
+  alpha: 0.5
