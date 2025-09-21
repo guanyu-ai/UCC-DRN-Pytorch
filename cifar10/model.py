@@ -99,7 +99,7 @@ class UCCModel(nn.Module):
         self.num_instances = args.num_instances
         self.num_features = model_cfg.encoder.num_features
         self.num_channels = model_cfg.num_channels
-        self.num_classes = 2
+        self.num_classes = model_cfg.num_classes
         self.batch_size = args.batch_size
         self.alpha = model_cfg.loss.alpha
         self.sigma = model_cfg.kde_model.sigma

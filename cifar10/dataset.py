@@ -13,7 +13,6 @@ class Cifar10Dataset(Dataset):
     def __init__(
          self,
         num_instances=2,
-        num_samples_per_class=16,
         object_arr=[],
         ucc_start=1,
         ucc_end=10,
@@ -21,7 +20,6 @@ class Cifar10Dataset(Dataset):
         length = 80000
     ):
         self._num_instances = num_instances # number of instances per bag
-        self._num_samples_per_class = num_samples_per_class # number of bags per class in each batch
         self._object_arr = object_arr #  array of digits taken
         self._ucc_start = ucc_start # smallest ucc class
         self._ucc_end = ucc_end # largest ucc class
@@ -77,8 +75,6 @@ class Cifar10Dataset(Dataset):
         self._class_dict_train = self.get_class_dict()
         # self._class_dict_val = self.get_class_dict()
 
-        self._labels = self.generate_labels()
-
 
     def get_object_dict(self):
         object_dict = dict()
@@ -118,23 +114,6 @@ class Cifar10Dataset(Dataset):
             class_dict[class_key] = elements_array
             
         return class_dict
-
-    def one_hot_label(self, label):
-        one_hot_label = np.zeros(self._num_classes, dtype=np.int32)
-        one_hot_label[label] = 1
-        return one_hot_label
-    
-    def generate_labels(self):
-        labels_list = list()
-        for i in range(self._num_classes):
-            labels_list.append(self.one_hot_label(i))
-
-        labels_arr = np.repeat(
-            np.array(labels_list), self._num_samples_per_class, axis=0
-        )
-        # print(labels_arr)
-
-        return labels_arr
     
     def __len__(self):
         return self.length
@@ -142,7 +121,6 @@ class Cifar10Dataset(Dataset):
     def __getitem__(self, index):
         class_label = index%self._num_classes   # get a class label
         class_key = f"class_{class_label}"
-        print(self._class_dict_train)
         ind = np.random.randint(0, len(self._class_dict_train[class_key]))
         elems = self._class_dict_train[class_key][ind, :]
         num_elems = len(elems)

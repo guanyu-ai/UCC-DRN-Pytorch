@@ -29,6 +29,6 @@ ucc_classifier:
   fc1_output_size: 384
   fc2_output_size: 192
   dropout_rate: 0.0
-  num_classes: 4
+num_classes: 4
 loss:
   alpha: 0.5
